@@ -20,11 +20,11 @@
         <div id="welcome-screen" class="bg-white rounded-xl shadow-lg p-6 md:p-10 text-center">
             <h2 class="text-2xl font-bold text-gray-700 mb-4">Selamat Datang di Tes Potensi SMK</h2>
             <p class="text-gray-600 mb-6 leading-relaxed">
-                Tes ini terdiri dari 3 bagian: <strong>Bagian I (30 Soal Minat)</strong>, <strong>Bagian II (45 Soal Bakat)</strong>, dan <strong>Bagian III (Tes Buta Warna Dasar)</strong>. 
+                Tes ini terdiri dari 3 bagian: <strong>Bagian I (30 Soal Minat)</strong>, <strong>Bagian II (45 Soal Bakat)</strong>, dan <strong>Bagian III (Validasi Buta Warna Eksternal)</strong>. 
                 Hasil akhir akan merekomendasikan jurusan terbaik antara 
-                <span class="text-blue-600 font-semibold">DKV (Desain Komunikasi Visual)</span>, 
-                <span class="text-green-600 font-semibold">TKR (Teknik Kendaraan Ringan)</span>, atau 
-                <span class="text-purple-600 font-semibold">AKL (Akuntansi & Keuangan Lembaga)</span>.
+                <span class="text-blue-600 font-semibold">DKV</span>, 
+                <span class="text-green-600 font-semibold">TKR</span>, atau 
+                <span class="text-purple-600 font-semibold">AKL</span>.
             </p>
             <button onclick="startQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow transform transition hover:scale-105">
                 Mulai Tes Sekarang
@@ -47,8 +47,11 @@
                 <p id="question-text" class="text-lg font-medium text-gray-900 leading-snug">Pertanyaan akan muncul di sini...</p>
             </div>
 
-            <div id="image-container" class="mb-6 hidden flex justify-center">
-                <img id="question-image" src="" alt="Gambar Soal" class="rounded-lg shadow-md max-h-56 object-contain border border-gray-200">
+            <div id="external-link-container" class="mb-8 hidden flex justify-center">
+                <a id="external-test-btn" href="#" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center space-x-2 animate-pulse">
+                    <span>Mulai Tes Buta Warna di Tab Baru</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" /><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" /></svg>
+                </a>
             </div>
 
             <div id="options-container" class="space-y-4">
@@ -61,7 +64,7 @@
 
             <div id="color-blind-warning" class="hidden bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 text-left shadow-sm rounded-r-lg">
                 <p class="font-bold">⚠️ Perhatian Khusus (Indikasi Buta Warna):</p>
-                <p class="text-sm mt-1 text-red-600">Berdasarkan Bagian III, terdapat indikasi Anda kesulitan membaca pola warna. Jurusan <strong>DKV</strong> dan <strong>TKR</strong> umumnya mensyaratkan calon siswa wajib bebas buta warna. Sangat disarankan untuk memprioritaskan jurusan AKL atau berkonsultasi ke dokter/puskesmas untuk tes resmi sebelum mendaftar ke sekolah.</p>
+                <p class="text-sm mt-1 text-red-600">Berdasarkan hasil tes buta warna Anda, terdapat indikasi kesulitan membedakan warna. Jurusan <strong>DKV</strong> dan <strong>TKR</strong> umumnya mensyaratkan calon siswa wajib bebas buta warna parsial maupun total. Sangat disarankan untuk memprioritaskan jurusan <strong>AKL</strong> atau berkonsultasi ke dokter/puskesmas untuk tes resmi.</p>
             </div>
 
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-500 rounded-xl p-6 mb-8 shadow-sm">
@@ -116,7 +119,7 @@
     </footer>
 
     <script>
-        // DATA SOAL BAGIAN I: MINAT
+        // DATA SOAL BAGIAN I: MINAT (TIDAK BERUBAH)
         const minatQuestions = [
             { q: "Saat melihat poster film atau sampul buku di toko, apa yang paling menarik perhatian Anda?", a: "Kombinasi warna, jenis huruf (font), dan keindahan gambarnya.", b: "Bahan kertas yang digunakan atau cara buku itu dijilid.", c: "Harga poster/buku tersebut dan apakah sedang ada diskon.", cat: "Minat - Kategori A" },
             { q: "Jika Anda memiliki waktu luang di rumah, aktivitas mana yang paling membuat Anda betah berjam-jam?", a: "Menggambar, mengedit foto/video di HP, atau membuat konten kreatif.", b: "Membongkar mainan, memperbaiki barang rusak, atau mengotak-atik alat elektronik.", c: "Menyusun jadwal harian, merapikan koleksi barang, atau menghitung uang tabungan.", cat: "Minat - Kategori A" },
@@ -152,7 +155,7 @@
             { q: "Masa depan profesi seperti apa yang paling sering Anda bayangkan untuk diri Anda sendiri?", a: "Desainer grafis, animator, fotografer, atau kreator konten mandiri.", b: "Mekanik profesional, kepala bengkel, modifikator kendaraan, atau teknisi industri.", c: "Akuntan, manajer keuangan, pegawai bank, atau auditor pajak di perusahaan besar.", cat: "Minat - Kategori C" }
         ];
 
-        // DATA SOAL BAGIAN II: BAKAT
+        // DATA SOAL BAGIAN II: BAKAT (TIDAK BERUBAH)
         const bakatQuestions = [
             { q: "Jika warna merah dicampur dengan warna kuning, maka akan menghasilkan warna...", options: { A: "Hijau", B: "Ungu", C: "Oranye", D: "Hitam" }, key: "C", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
             { q: "Manakah di antara bentuk berikut yang memiliki sudut paling banyak?", options: { A: "Segitiga", B: "Persegi", C: "Segilima", D: "Lingkaran" }, key: "C", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
@@ -203,28 +206,18 @@
             { q: "Manakah dari kegiatan berikut yang membutuhkan tingkat ketelitian hitung paling tinggi?", options: { A: "Menyapu halaman sekolah", B: "Menghitung uang kembalian dan mencatat kas masuk-keluar", C: "Mendengarkan musik di radio", D: "Berolahraga lari pagi" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" }
         ];
 
-        // DATA SOAL BAGIAN III: TES BUTA WARNA (Gambar SVG dari Wikimedia untuk kestabilan)
+        // DATA SOAL BAGIAN III: TES BUTA WARNA EKSTERNAL
         const butaWarnaQuestions = [
             {
-                q: "Angka berapakah yang tersembunyi di dalam pola warna di bawah ini?",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ishihara_1.svg/500px-Ishihara_1.svg.png",
-                options: { A: "12", B: "7", C: "Tidak ada angka", D: "21" },
+                q: "Silakan klik tombol di atas untuk melakukan tes buta warna di website pihak ketiga (misalnya Enchroma/Colorlite).<br><br>Setelah Anda mendapatkan hasilnya dari website tersebut, kembalilah ke halaman ini dan pilih kesimpulan hasil Anda di bawah ini:",
+                isExternalLink: true,
+                link: "https://enchroma.com/pages/color-blind-test", // Anda bisa mengganti URL ini dengan web tes lain jika mau
+                options: { 
+                    A: "Penglihatan Normal (Bebas Buta Warna)", 
+                    B: "Terdapat Indikasi Buta Warna (Parsial/Total)" 
+                },
                 key: "A",
-                cat: "Tes Buta Warna Dasar"
-            },
-            {
-                q: "Angka berapakah yang tersembunyi di dalam pola warna di bawah ini?",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Ishihara_2.svg/500px-Ishihara_2.svg.png",
-                options: { A: "3", B: "5", C: "8", D: "Tidak ada angka" },
-                key: "C",
-                cat: "Tes Buta Warna Dasar"
-            },
-            {
-                q: "Angka berapakah yang tersembunyi di dalam pola warna di bawah ini?",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Ishihara_9.svg/500px-Ishihara_9.svg.png",
-                options: { A: "71", B: "74", C: "24", D: "Tidak ada angka" },
-                key: "B",
-                cat: "Tes Buta Warna Dasar"
+                cat: "Tes Buta Warna Eksternal"
             }
         ];
 
@@ -238,7 +231,7 @@
         // Counter Jawaban
         let rawMinat = { dkv: 0, tkr: 0, akl: 0 };
         let rawBakat = { dkv: 0, tkr: 0, akl: 0 };
-        let skorButaWarna = 0; // Skor maksimal 3 (jika benar semua)
+        let isButaWarna = false; // Flag status buta warna
 
         // DOM Elements
         const welcomeScreen = document.getElementById('welcome-screen');
@@ -249,8 +242,8 @@
         const progressBar = document.getElementById('progress-bar');
         const questionCategory = document.getElementById('question-category');
         const questionText = document.getElementById('question-text');
-        const imageContainer = document.getElementById('image-container');
-        const questionImage = document.getElementById('question-image');
+        const externalLinkContainer = document.getElementById('external-link-container');
+        const externalTestBtn = document.getElementById('external-test-btn');
         const optionsContainer = document.getElementById('options-container');
 
         function startQuiz() {
@@ -259,52 +252,53 @@
             currentQuestionIndex = 0;
             rawMinat = { dkv: 0, tkr: 0, akl: 0 };
             rawBakat = { dkv: 0, tkr: 0, akl: 0 };
-            skorButaWarna = 0;
+            isButaWarna = false;
             showQuestion();
         }
 
         function showQuestion() {
-            // Update Progress Bar
             const progressPercent = (currentQuestionIndex / totalQuestions) * 100;
             progressBar.style.width = `${progressPercent}%`;
             progressText.innerText = `Soal ${currentQuestionIndex + 1} dari ${totalQuestions}`;
 
             optionsContainer.innerHTML = '';
-            imageContainer.classList.add('hidden'); // Sembunyikan kontainer gambar secara default
+            externalLinkContainer.classList.add('hidden'); // Sembunyikan tombol link by default
 
             if (currentQuestionIndex < totalMinat) {
-                // RENDER BAGIAN I: MINAT
+                // RENDER BAGIAN I
                 sectionTitle.innerText = "Bagian I: Tes Minat";
                 const qData = minatQuestions[currentQuestionIndex];
                 questionCategory.innerText = qData.cat;
-                questionText.innerText = qData.q;
+                questionText.innerHTML = qData.q;
 
                 createOptionButton('A', qData.a, () => handleMinatAnswer('dkv'));
                 createOptionButton('B', qData.b, () => handleMinatAnswer('tkr'));
                 createOptionButton('C', qData.c, () => handleMinatAnswer('akl'));
 
             } else if (currentQuestionIndex < totalMinat + totalBakat) {
-                // RENDER BAGIAN II: BAKAT
+                // RENDER BAGIAN II
                 sectionTitle.innerText = "Bagian II: Tes Bakat Dasar";
                 const bakatIndex = currentQuestionIndex - totalMinat;
                 const qData = bakatQuestions[bakatIndex];
                 questionCategory.innerText = qData.cat;
-                questionText.innerText = qData.q;
+                questionText.innerHTML = qData.q;
 
                 Object.keys(qData.options).forEach(optKey => {
                     createOptionButton(optKey, qData.options[optKey], () => handleBakatAnswer(optKey, qData.key, qData.type));
                 });
             } else {
-                // RENDER BAGIAN III: TES BUTA WARNA
-                sectionTitle.innerText = "Bagian III: Tes Buta Warna Dasar";
+                // RENDER BAGIAN III: LINK EKSTERNAL
+                sectionTitle.innerText = "Bagian III: Validasi Buta Warna (Eksternal)";
                 const bwIndex = currentQuestionIndex - (totalMinat + totalBakat);
                 const qData = butaWarnaQuestions[bwIndex];
                 questionCategory.innerText = qData.cat;
-                questionText.innerText = qData.q;
+                questionText.innerHTML = qData.q;
                 
-                // Tampilkan gambar khusus di sesi ini
-                imageContainer.classList.remove('hidden');
-                questionImage.src = qData.image;
+                // Jika soal ini mengharuskan buka link luar, munculkan tombol
+                if (qData.isExternalLink) {
+                    externalLinkContainer.classList.remove('hidden');
+                    externalTestBtn.href = qData.link;
+                }
 
                 Object.keys(qData.options).forEach(optKey => {
                     createOptionButton(optKey, qData.options[optKey], () => handleButaWarnaAnswer(optKey, qData.key));
@@ -333,8 +327,9 @@
         }
 
         function handleButaWarnaAnswer(selectedOpt, correctOpt) {
-            if (selectedOpt === correctOpt) {
-                skorButaWarna++;
+            // Jika dia memilih jawaban SELAIN kunci "Normal" (contoh: opsi B/Buta Warna)
+            if (selectedOpt !== correctOpt) {
+                isButaWarna = true;
             }
             nextQuestion();
         }
@@ -387,7 +382,7 @@
 
             document.getElementById('recommended-major').innerText = finalRecommendation;
 
-            // Logika Passing Grade
+            // Evaluasi Passing Grade
             const noteElement = document.getElementById('passing-grade-note');
             if (finalScore >= 60) {
                 noteElement.innerHTML = `✅ Skor Anda <strong>${finalScore}</strong> memenuhi batas minimum kelancaran teknis (Passing Grade &ge; 60). Anda diprediksi siap menyerap pelajaran produktif dengan baik!`;
@@ -397,13 +392,11 @@
                 noteElement.className = "text-sm text-amber-600 mt-2 font-medium";
             }
 
-            // Logika Evaluasi Tes Buta Warna
+            // Evaluasi Status Buta Warna
             const bwWarningElement = document.getElementById('color-blind-warning');
-            if (skorButaWarna < totalButaWarna) {
-                // Jika menjawab salah walau hanya 1 (skor < 3), tampilkan box merah peringatan
+            if (isButaWarna) {
                 bwWarningElement.classList.remove('hidden');
             } else {
-                // Jika benar semua, sembunyikan (aman)
                 bwWarningElement.classList.add('hidden');
             }
         }
