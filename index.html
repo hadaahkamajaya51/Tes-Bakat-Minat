@@ -6,7 +6,7 @@
     <title>Aplikasi Tes Bakat & Minat SMK</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
 
     <header class="bg-blue-600 text-white py-6 shadow-md mb-8">
         <div class="container mx-auto px-4 text-center">
@@ -15,12 +15,12 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 max-w-4xl pb-12">
+    <main class="container mx-auto px-4 max-w-4xl pb-12 flex-grow">
         
         <div id="welcome-screen" class="bg-white rounded-xl shadow-lg p-6 md:p-10 text-center">
             <h2 class="text-2xl font-bold text-gray-700 mb-4">Selamat Datang di Tes Potensi SMK</h2>
             <p class="text-gray-600 mb-6 leading-relaxed">
-                Tes ini terdiri dari 2 bagian: <strong>Bagian I (30 Soal Minat)</strong> dan <strong>Bagian II (45 Soal Bakat)</strong>. 
+                Tes ini terdiri dari 3 bagian: <strong>Bagian I (30 Soal Minat)</strong>, <strong>Bagian II (45 Soal Bakat)</strong>, dan <strong>Bagian III (Tes Buta Warna Dasar)</strong>. 
                 Hasil akhir akan merekomendasikan jurusan terbaik antara 
                 <span class="text-blue-600 font-semibold">DKV (Desain Komunikasi Visual)</span>, 
                 <span class="text-green-600 font-semibold">TKR (Teknik Kendaraan Ringan)</span>, atau 
@@ -35,16 +35,20 @@
             <div class="mb-6">
                 <div class="flex justify-between text-sm font-medium text-gray-500 mb-1">
                     <span id="section-title">Bagian I: Tes Minat</span>
-                    <span id="progress-text">Soal 1 dari 75</span>
+                    <span id="progress-text">Soal 1 dari ...</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5">
                     <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
                 </div>
             </div>
 
-            <div class="mb-8">
+            <div class="mb-6 text-center">
                 <span id="question-category" class="inline-block bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded-full font-semibold mb-3">Kategori</span>
                 <p id="question-text" class="text-lg font-medium text-gray-900 leading-snug">Pertanyaan akan muncul di sini...</p>
+            </div>
+
+            <div id="image-container" class="mb-6 hidden flex justify-center">
+                <img id="question-image" src="" alt="Gambar Soal" class="rounded-lg shadow-md max-h-56 object-contain border border-gray-200">
             </div>
 
             <div id="options-container" class="space-y-4">
@@ -53,7 +57,12 @@
 
         <div id="result-screen" class="hidden bg-white rounded-xl shadow-lg p-6 md:p-10 text-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-2">🎉 Hasil Tes Anda</h2>
-            <p class="text-gray-500 mb-8">Berdasarkan kalkulasi minat dan bakat murni</p>
+            <p class="text-gray-500 mb-6">Berdasarkan kalkulasi minat dan bakat murni</p>
+
+            <div id="color-blind-warning" class="hidden bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 text-left shadow-sm rounded-r-lg">
+                <p class="font-bold">⚠️ Perhatian Khusus (Indikasi Buta Warna):</p>
+                <p class="text-sm mt-1 text-red-600">Berdasarkan Bagian III, terdapat indikasi Anda kesulitan membaca pola warna. Jurusan <strong>DKV</strong> dan <strong>TKR</strong> umumnya mensyaratkan calon siswa wajib bebas buta warna. Sangat disarankan untuk memprioritaskan jurusan AKL atau berkonsultasi ke dokter/puskesmas untuk tes resmi sebelum mendaftar ke sekolah.</p>
+            </div>
 
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-500 rounded-xl p-6 mb-8 shadow-sm">
                 <p class="text-sm text-blue-600 uppercase font-bold tracking-wider">Rekomendasi Utama (Prioritas 1)</p>
@@ -107,10 +116,8 @@
     </footer>
 
     <script>
-        // DATA SOAL BAGIAN 1: MINAT
-        // Kunci pemetaan jawaban: A=DKV, B=TKR, C=AKL (Berlaku untuk semua sub-kategori A, B, C)
+        // DATA SOAL BAGIAN I: MINAT
         const minatQuestions = [
-            // Kategori A
             { q: "Saat melihat poster film atau sampul buku di toko, apa yang paling menarik perhatian Anda?", a: "Kombinasi warna, jenis huruf (font), dan keindahan gambarnya.", b: "Bahan kertas yang digunakan atau cara buku itu dijilid.", c: "Harga poster/buku tersebut dan apakah sedang ada diskon.", cat: "Minat - Kategori A" },
             { q: "Jika Anda memiliki waktu luang di rumah, aktivitas mana yang paling membuat Anda betah berjam-jam?", a: "Menggambar, mengedit foto/video di HP, atau membuat konten kreatif.", b: "Membongkar mainan, memperbaiki barang rusak, atau mengotak-atik alat elektronik.", c: "Menyusun jadwal harian, merapikan koleksi barang, atau menghitung uang tabungan.", cat: "Minat - Kategori A" },
             { q: "Ketika mengunjungi sebuah tempat wisata baru, apa yang ingin Anda lakukan?", a: "Mengambil foto atau video dari sudut yang estetis untuk media sosial.", b: "Memperhatikan bagaimana mesin wahana permainan bekerja atau kendaraan di sana.", c: "Menghitung perkiraan total biaya perjalanan dan oleh-oleh yang dibeli.", cat: "Minat - Kategori A" },
@@ -122,7 +129,6 @@
             { q: "Jika Anda diminta membuat tugas presentasi di kelas, fokus utama Anda adalah...", a: "Memastikan tampilan slide sangat menarik, rapi, dan menggunakan animasi yang pas.", b: "Memastikan laptop dan proyektor terhubung dengan baik tanpa gangguan teknis.", c: "Memastikan data, grafik, dan angka yang disajikan akurat dan teratur.", cat: "Minat - Kategori A" },
             { q: "Media informasi apa yang paling Anda sukai saat mempelajari hal baru?", a: "Komik Infografis, video animasi, atau poster penuh warna.", b: "Video tutorial bongkar pasang atau simulasi 3D.", c: "Artikel ilmiah yang penuh dengan data statistik dan tabel perbandingan.", cat: "Minat - Kategori A" },
             
-            // Kategori B
             { q: "Saat berada di jalan raya dan melihat mobil sport lewat, apa yang pertama kali membuat Anda penasaran?", a: "Desain bodi mobil, pilihan warna, dan stiker bodi yang menempel.", b: "Suara deru mesinnya, kecepatan, dan teknologi mesin yang digunakan.", c: "Perkiraan harga mobil tersebut dan berapa cicilan per bulannya.", cat: "Minat - Kategori B" },
             { q: "Anda menemukan sebuah obeng dan kunci pas tergeletak di meja ayah Anda. Reaksi Anda adalah...", a: "Memperhatikan bentuk gagangnya dan berpikir bagaimana mendesain obeng yang lebih keren.", b: "Merasa tertarik untuk mencoba menggunakannya pada baut-baut yang longgar di rumah.", c: "Menghitung ada berapa jumlah alat kerja tersebut dan berapa harga belinya.", cat: "Minat - Kategori B" },
             { q: "Jika sepeda atau motor di rumah Anda mendadak mogok atau rantainya lepas, apa yang Anda lakukan?", a: "Memotretnya karena terlihat estetik atau mencari ide modifikasi tampilannya.", b: "Mengambil peralatan dan mencoba mencari tahu penyebab mogok serta memperbaikinya sendiri.", c: "Menghitung perkiraan biaya jika harus dibawa ke bengkel resmi.", cat: "Minat - Kategori B" },
@@ -134,7 +140,6 @@
             { q: "Saat melihat mainan mobil-mobilan (Tamiya/HotWheels), fokus Anda tertuju pada...", a: "Detail pengecatan grafis dan bentuk lekukan aerodinamis bodinya.", b: "Cara kerja gir di dalamnya, jenis dinamo, dan kecepatan putaran roda.", c: "Berapah harga pasaran mobil tersebut jika dijual kembali sebagai barang koleksi.", cat: "Minat - Kategori B" },
             { q: "Jika mendengar kata \"Mesin\", apa hal pertama yang muncul di benak Anda?", a: "Bentuknya yang rumit dan estetika industri modern.", b: "Kekuatan, oli, piston, komponen berputar, dan tenaga yang dihasilkan.", c: "Biaya perawatan rutin dan efisiensi bahan bakarnya.", cat: "Minat - Kategori B" },
             
-            // Kategori C
             { q: "Ketika Anda menerima uang saku mingguan atau bulanan dari orang tua, apa yang Anda lakukan?", a: "Membeli perlengkapan hobi (buku gambar, aksesori, pakaian bergaya).", b: "Menyisihkannya sedikit untuk membeli sparepart kendaraan atau alat hobi mekanik.", c: "Langsung mencatatnya di buku/aplikasi kas dan membaginya ke dalam pos-pos pengeluaran dengan detail.", cat: "Minat - Kategori C" },
             { q: "Saat bekerja kelompok di kelas, tugas mana yang paling sering diserahkan teman-teman kepada Anda?", a: "Membuat desain slide PowerPoint atau menggambar cover laporan.", b: "Mengurus masalah teknis, cetak dokumen, atau membawa barang bawaan berat.", c: "Mengumpulkan uang patungan, membelanjakan kebutuhan, dan mencatat sisa kembalian secara jujur.", cat: "Minat - Kategori C" },
             { q: "Anda melihat selembar struk belanja minimarket yang sangat panjang. Apa yang Anda perhatikan?", a: "Jenis huruf yang digunakan mesin cetak struk dan penempatan logo minimarketnya.", b: "Cara kerja mesin kasir dan printer struk thermal dalam mencetak tanpa tinta.", c: "Memeriksa baris demi baris barang, mencocokkan harga total, dan melihat jumlah diskonnya.", cat: "Minat - Kategori C" },
@@ -148,9 +153,7 @@
         ];
 
         // DATA SOAL BAGIAN II: BAKAT
-        // Pemetaan Jurusan: dkv (Sub 1), tkr (Sub 2), akl (Sub 3)
         const bakatQuestions = [
-            // Sub-Bagian 1: DKV (Spasial & Kreativitas)
             { q: "Jika warna merah dicampur dengan warna kuning, maka akan menghasilkan warna...", options: { A: "Hijau", B: "Ungu", C: "Oranye", D: "Hitam" }, key: "C", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
             { q: "Manakah di antara bentuk berikut yang memiliki sudut paling banyak?", options: { A: "Segitiga", B: "Persegi", C: "Segilima", D: "Lingkaran" }, key: "C", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
             { q: "Saat Anda melihat bayangan Anda sendiri di cermin datar, posisi tangan kanan Anda akan terlihat di sisi...", options: { A: "Kiri cermin", B: "Kanan cermin", C: "Atas cermin", D: "Belakang cermin" }, key: "A", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
@@ -167,7 +170,6 @@
             { q: "Menata gambar dan teks pada halaman brosur agar terlihat rapi, indah, dan tidak berantakan disebut kegiatan...", options: { A: "Memotong (Cropping)", B: "Menyalin (Copying)", C: "Mengatur tata letak (Layout)", D: "Mewarnai (Coloring)" }, key: "C", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
             { q: "Aplikasi di komputer yang paling dasar dan mudah digunakan untuk menggambar bentuk-bentuk sederhana atau mewarnai secara digital adalah...", options: { A: "Microsoft Excel", B: "Notepad", C: "Paint", D: "Calculator" }, key: "C", type: "dkv", cat: "Bakat - Spasial & Kreativitas" },
 
-            // Sub-Bagian 2: TKR (Mekanika & Fisika Dasar)
             { q: "Alat tangan apa yang paling cocok digunakan untuk melonggarkan atau mengencangkan baut berkepala silang (+)?", options: { A: "Kunci pas", B: "Obeng plus (kembang)", C: "Tang potong", D: "Palu" }, key: "B", type: "tkr", cat: "Bakat - Mekanika & Fisika" },
             { q: "Ketika sebuah sepeda dikayuh, bagian apa yang berfungsi meneruskan putaran dari pedal ke roda belakang?", options: { A: "Setang sepeda", B: "Rem sepeda", C: "Rantai sepeda", D: "Sadel sepeda" }, key: "C", type: "tkr", cat: "Bakat - Mekanika & Fisika" },
             { q: "Apa fungsi utama dari oli pada mesin motor atau mobil?", options: { A: "Sebagai bahan bakar agar mesin hidup", B: "Pelumas agar komponen mesin tidak aus dan macet akibat gesekan", C: "Mendinginkan lampu kendaraan", D: "Membuat suara knalpot menjadi lebih nyaring" }, key: "B", type: "tkr", cat: "Bakat - Mekanika & Fisika" },
@@ -184,7 +186,6 @@
             { q: "Mengapa saat mengendarai motor kita wajib menggunakan helm?", options: { A: "Agar tidak terkena tilang saja", B: "Melindungi kepala dari benturan jika terjadi kecelakaan", C: "Agar rambut tidak basah saat hujan", D: "Mengikuti tren mode" }, key: "B", type: "tkr", cat: "Bakat - Mekanika & Fisika" },
             { q: "Alat yang digunakan untuk mengisi angin ke dalam ban sepeda yang kempes adalah...", options: { A: "Pompa angin", B: "Corong air", C: "Obeng ketok", D: "Solder" }, key: "A", type: "tkr", cat: "Bakat - Mekanika & Fisika" },
 
-            // Sub-Bagian 3: AKL (Logika Numerik & Ketelitian)
             { q: "Hitunglah hasil dari penjumlahan berikut: 150 + 250 - 50 = ...", options: { A: "300", B: "350", C: "400", D: "250" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Jika Anda membeli 3 buah pulpen dengan harga masing-masing Rp3.000, berapa total uang yang harus Anda bayar?", options: { A: "Rp6.000", B: "Rp9.000", C: "Rp12.000", D: "Rp3.000" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Anda membayar belanjaan sebesar Rp12.000 dengan selembar uang Rp20.000. Berapa uang kembalian yang harus Anda terima?", options: { A: "Rp5.000", B: "Rp6.000", C: "Rp8.000", D: "Rp10.000" }, key: "C", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
@@ -193,7 +194,7 @@
             { q: "Ibu membagi uang Rp100.000 secara merata kepada 4 orang anaknya. Berapa jumlah uang yang diterima masing-masing anak?", options: { A: "Rp20.000", B: "Rp25.000", C: "Rp30.000", D: "Rp50.000" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Jika sebuah barang dibeli dengan harga Rp10.000 lalu dijual kembali dengan harga Rp15.000, maka toko tersebut mengalami...", options: { A: "Kerugian Rp5.000", B: "Keuntungan Rp5.000", C: "Kerugian Rp15.000", D: "Impas (tidak untung tidak rugi)" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Carilah pasangan nama yang ditulis tidak sama/salah ketik pada bagian kedua:", options: { A: "Budi Santoso - Budi Santoso", B: "Siti Rahma - Siti Rahma", C: "Ahmad Fauzi - Ahmad Fauji", D: "Mega Utami - Mega Utami" }, key: "C", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
-            { q: "Berapakah setengah (50%) dari uang Rp50.000?", options: { A: "Rp15.000", B: "Rp20.000", C: "Rp25.000", D: "Rp30.000" }, options: { A: "Rp15.000", B: "Rp20.000", C: "Rp25.000", D: "Rp30.000" }, key: "C", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
+            { q: "Berapakah setengah (50%) dari uang Rp50.000?", options: { A: "Rp15.000", B: "Rp20.000", C: "Rp25.000", D: "Rp30.000" }, key: "C", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Kakak menabung Rp5.000 setiap hari. Berapa total uang tabungan Kakak setelah 10 hari?", options: { A: "Rp15.000", B: "Rp50.000", C: "Rp100.000", D: "Rp5.500" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Di dalam dompet Andi ada 3 lembar uang Rp10.000 dan 2 lembar uang Rp5.000. Berapa total uang Andi?", options: { A: "Rp35.000", B: "Rp40.000", C: "Rp25.000", D: "Rp30.000" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
             { q: "Jika hari ini Anda meminjam uang teman sebesar Rp15.000, maka Anda memiliki... kepada teman tersebut.", options: { A: "Piutang (tagihan)", B: "Utang (kewajiban membayar)", C: "Tabungan", D: "Hadiah" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" },
@@ -202,15 +203,42 @@
             { q: "Manakah dari kegiatan berikut yang membutuhkan tingkat ketelitian hitung paling tinggi?", options: { A: "Menyapu halaman sekolah", B: "Menghitung uang kembalian dan mencatat kas masuk-keluar", C: "Mendengarkan musik di radio", D: "Berolahraga lari pagi" }, key: "B", type: "akl", cat: "Bakat - Logika Numerik & Ketelitian" }
         ];
 
+        // DATA SOAL BAGIAN III: TES BUTA WARNA (Gambar SVG dari Wikimedia untuk kestabilan)
+        const butaWarnaQuestions = [
+            {
+                q: "Angka berapakah yang tersembunyi di dalam pola warna di bawah ini?",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ishihara_1.svg/500px-Ishihara_1.svg.png",
+                options: { A: "12", B: "7", C: "Tidak ada angka", D: "21" },
+                key: "A",
+                cat: "Tes Buta Warna Dasar"
+            },
+            {
+                q: "Angka berapakah yang tersembunyi di dalam pola warna di bawah ini?",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Ishihara_2.svg/500px-Ishihara_2.svg.png",
+                options: { A: "3", B: "5", C: "8", D: "Tidak ada angka" },
+                key: "C",
+                cat: "Tes Buta Warna Dasar"
+            },
+            {
+                q: "Angka berapakah yang tersembunyi di dalam pola warna di bawah ini?",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Ishihara_9.svg/500px-Ishihara_9.svg.png",
+                options: { A: "71", B: "74", C: "24", D: "Tidak ada angka" },
+                key: "B",
+                cat: "Tes Buta Warna Dasar"
+            }
+        ];
+
         // State Aplikasi
         let currentQuestionIndex = 0;
         const totalMinat = minatQuestions.length;
         const totalBakat = bakatQuestions.length;
-        const totalQuestions = totalMinat + totalBakat;
+        const totalButaWarna = butaWarnaQuestions.length;
+        const totalQuestions = totalMinat + totalBakat + totalButaWarna;
 
         // Counter Jawaban
         let rawMinat = { dkv: 0, tkr: 0, akl: 0 };
         let rawBakat = { dkv: 0, tkr: 0, akl: 0 };
+        let skorButaWarna = 0; // Skor maksimal 3 (jika benar semua)
 
         // DOM Elements
         const welcomeScreen = document.getElementById('welcome-screen');
@@ -221,6 +249,8 @@
         const progressBar = document.getElementById('progress-bar');
         const questionCategory = document.getElementById('question-category');
         const questionText = document.getElementById('question-text');
+        const imageContainer = document.getElementById('image-container');
+        const questionImage = document.getElementById('question-image');
         const optionsContainer = document.getElementById('options-container');
 
         function startQuiz() {
@@ -229,16 +259,18 @@
             currentQuestionIndex = 0;
             rawMinat = { dkv: 0, tkr: 0, akl: 0 };
             rawBakat = { dkv: 0, tkr: 0, akl: 0 };
+            skorButaWarna = 0;
             showQuestion();
         }
 
         function showQuestion() {
-            // Update Progress Bar & Text
+            // Update Progress Bar
             const progressPercent = (currentQuestionIndex / totalQuestions) * 100;
             progressBar.style.width = `${progressPercent}%`;
             progressText.innerText = `Soal ${currentQuestionIndex + 1} dari ${totalQuestions}`;
 
             optionsContainer.innerHTML = '';
+            imageContainer.classList.add('hidden'); // Sembunyikan kontainer gambar secara default
 
             if (currentQuestionIndex < totalMinat) {
                 // RENDER BAGIAN I: MINAT
@@ -247,12 +279,11 @@
                 questionCategory.innerText = qData.cat;
                 questionText.innerText = qData.q;
 
-                // Create options button
                 createOptionButton('A', qData.a, () => handleMinatAnswer('dkv'));
                 createOptionButton('B', qData.b, () => handleMinatAnswer('tkr'));
                 createOptionButton('C', qData.c, () => handleMinatAnswer('akl'));
 
-            } else {
+            } else if (currentQuestionIndex < totalMinat + totalBakat) {
                 // RENDER BAGIAN II: BAKAT
                 sectionTitle.innerText = "Bagian II: Tes Bakat Dasar";
                 const bakatIndex = currentQuestionIndex - totalMinat;
@@ -260,9 +291,23 @@
                 questionCategory.innerText = qData.cat;
                 questionText.innerText = qData.q;
 
-                // Loop options ABCD
                 Object.keys(qData.options).forEach(optKey => {
                     createOptionButton(optKey, qData.options[optKey], () => handleBakatAnswer(optKey, qData.key, qData.type));
+                });
+            } else {
+                // RENDER BAGIAN III: TES BUTA WARNA
+                sectionTitle.innerText = "Bagian III: Tes Buta Warna Dasar";
+                const bwIndex = currentQuestionIndex - (totalMinat + totalBakat);
+                const qData = butaWarnaQuestions[bwIndex];
+                questionCategory.innerText = qData.cat;
+                questionText.innerText = qData.q;
+                
+                // Tampilkan gambar khusus di sesi ini
+                imageContainer.classList.remove('hidden');
+                questionImage.src = qData.image;
+
+                Object.keys(qData.options).forEach(optKey => {
+                    createOptionButton(optKey, qData.options[optKey], () => handleButaWarnaAnswer(optKey, qData.key));
                 });
             }
         }
@@ -287,6 +332,13 @@
             nextQuestion();
         }
 
+        function handleButaWarnaAnswer(selectedOpt, correctOpt) {
+            if (selectedOpt === correctOpt) {
+                skorButaWarna++;
+            }
+            nextQuestion();
+        }
+
         function nextQuestion() {
             currentQuestionIndex++;
             if (currentQuestionIndex < totalQuestions) {
@@ -300,12 +352,10 @@
             quizScreen.classList.add('hidden');
             resultScreen.classList.remove('hidden');
 
-            // Hitung Rumus: (Minat * 4) + (Bakat * 4)
             const scoreDKV = (rawMinat.dkv * 4) + (rawBakat.dkv * 4);
             const scoreTKR = (rawMinat.tkr * 4) + (rawBakat.tkr * 4);
             const scoreAKL = (rawMinat.akl * 4) + (rawBakat.akl * 4);
 
-            // Tampilkan Detail ke Tabel HTML
             document.getElementById('minat-dkv').innerText = rawMinat.dkv * 4;
             document.getElementById('bakat-dkv').innerText = rawBakat.dkv * 4;
             document.getElementById('total-dkv').innerText = scoreDKV;
@@ -318,33 +368,26 @@
             document.getElementById('bakat-akl').innerText = rawBakat.akl * 4;
             document.getElementById('total-akl').innerText = scoreAKL;
 
-            // Analisis Rekomendasi Utama (Mengakomodasi Aturan Seri/Tie-Breaker)
-            let finalRecommendation = "";
-            let finalScore = 0;
-            let finalBakatMurni = 0;
-
             const majors = [
                 { name: "Desain Komunikasi Visual (DKV)", total: scoreDKV, bakatMurni: rawBakat.dkv },
                 { name: "Teknik Kendaraan Ringan (TKR)", total: scoreTKR, bakatMurni: rawBakat.tkr },
                 { name: "Akuntansi & Keuangan Lembaga (AKL)", total: scoreAKL, bakatMurni: rawBakat.akl }
             ];
 
-            // Sorting berdasarkan Total Skor Tertinggi. Jika sama, urutkan berdasarkan Bakat Murni Tertinggi
             majors.sort((itemA, itemB) => {
                 if (itemB.total !== itemA.total) {
-                    return itemB.total - itemA.total; // Prioritas 1: Skor Total Tertinggi
+                    return itemB.total - itemA.total;
                 } else {
-                    return itemB.bakatMurni - itemA.bakatMurni; // Prioritas 2 (Kondisi Seri): Bakat Murni diutamakan
+                    return itemB.bakatMurni - itemA.bakatMurni;
                 }
             });
 
-            finalRecommendation = majors[0].name;
-            finalScore = majors[0].total;
+            const finalRecommendation = majors[0].name;
+            const finalScore = majors[0].total;
 
-            // Update UI Rekomendasi
             document.getElementById('recommended-major').innerText = finalRecommendation;
 
-            // Analisis Passing Grade (Minimal 60 Poin)
+            // Logika Passing Grade
             const noteElement = document.getElementById('passing-grade-note');
             if (finalScore >= 60) {
                 noteElement.innerHTML = `✅ Skor Anda <strong>${finalScore}</strong> memenuhi batas minimum kelancaran teknis (Passing Grade &ge; 60). Anda diprediksi siap menyerap pelajaran produktif dengan baik!`;
@@ -352,6 +395,16 @@
             } else {
                 noteElement.innerHTML = `⚠️ Skor Anda <strong>${finalScore}</strong> berada di bawah batas disarankan (60 poin). Anda disarankan melakukan konsultasi tambahan atau belajar materi dasar penunjang lebih awal.`;
                 noteElement.className = "text-sm text-amber-600 mt-2 font-medium";
+            }
+
+            // Logika Evaluasi Tes Buta Warna
+            const bwWarningElement = document.getElementById('color-blind-warning');
+            if (skorButaWarna < totalButaWarna) {
+                // Jika menjawab salah walau hanya 1 (skor < 3), tampilkan box merah peringatan
+                bwWarningElement.classList.remove('hidden');
+            } else {
+                // Jika benar semua, sembunyikan (aman)
+                bwWarningElement.classList.add('hidden');
             }
         }
 
